@@ -1,8 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+}
+
 body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
-    font-family: 'Courier New', monospace;
     background-color: #000;
 }
 
@@ -227,9 +233,126 @@ body {
     letter-spacing: 1px;
 }
 
+/* Bouton plein écran style Matrix */
+.fullscreen-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
 
+.fullscreen-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #00cc00, #00ff00);
+    border: 2px solid #00ff00;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
 
+.fullscreen-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
+}
 
+/* Boutons zoom style Matrix avec rotation à 25° */
+.zoom-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.zoom-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #00cc00, #00ff00);
+    border: 2px solid #00ff00;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease; /* Ajout pour fluidifier le bouton entier */
+    position: relative;
+}
+
+.zoom-btn span {
+    display: block;
+    transition: transform 1.2s ease;
+    /* Pas de rotation par défaut */
+}
+
+.zoom-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.9);
+}
+
+/* Rotation spécifique pour le bouton + (zoom in) */
+#zoomIn:hover span {
+    transform: rotate(360deg); /* Tour complet pour plus de visibilité, ou gardez 25deg si préféré */
+}
+
+/* Rotation spécifique pour le bouton - (zoom out) */
+#zoomOut:hover span {
+    transform: rotate(-360deg); /* Tour dans l'autre sens pour différencier */
+}
+
+/* Animation de pulsation pour les boutons zoom */
+@keyframes pulse-green {
+    0% {
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.9), 0 0 30px rgba(0, 255, 0, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    }
+}
+
+.zoom-btn {
+    animation: pulse-green 2s infinite;
+}
+
+/* Version responsive pour les boutons zoom */
+@media screen and (max-width: 768px) {
+    .zoom-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .zoom-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .zoom-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+}
 
 /* ==================== RESPONSIVE 2025 ==================== */
 
@@ -335,6 +458,23 @@ body {
     .clock-container {
         margin-bottom: 15px;
     }
+    
+    .fullscreen-controls {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .fullscreen-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    
+    .zoom-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
 }
 
 /* Petits smartphones (320px - 576px) */
@@ -389,6 +529,23 @@ body {
     .content {
         padding-top: 20px;
         justify-content: flex-start;
+    }
+    
+    .fullscreen-controls {
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .fullscreen-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .zoom-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
     }
     
     @keyframes jumpRabbitMobile {
@@ -508,6 +665,18 @@ body {
     .countdown {
         font-size: 2.2rem;
     }
+    
+    .fullscreen-btn {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+    
+    .zoom-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
 }
 
 /* Réduction des animations pour les préférences utilisateur */
@@ -518,6 +687,14 @@ body {
     }
     
     .pill-container:hover {
+        transform: none;
+    }
+    
+    .zoom-btn {
+        animation: none;
+    }
+    
+    .zoom-btn:hover span {
         transform: none;
     }
 }

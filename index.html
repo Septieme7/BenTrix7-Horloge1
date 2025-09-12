@@ -9,7 +9,7 @@
     <link rel="icon" href="#" id="animatedFavicon">
     
     <!-- Fichier CSS externe -->
-    <link rel="stylesheet" href="./horloge_1.css">
+    <link rel="stylesheet" href="horloge_1.css">
 </head>
 <body>
     <!-- Canvas pour l'effet Matrix -->
@@ -19,6 +19,15 @@
     <div class="countdown-container">
         <div class="countdown-title">The End of FORMATION...</div>
         <div id="countdown" class="countdown"></div>
+    </div>
+
+    <!-- Contrôles plein écran et zoom -->
+    <div class="fullscreen-controls">
+        <button id="fullscreenButton" class="fullscreen-btn" title="Plein écran">⛶</button>
+        <div class="zoom-controls">
+            <button id="zoomIn" class="zoom-btn" title="Zoom +"><span>+</span></button>
+            <button id="zoomOut" class="zoom-btn" title="Zoom -"><span>-</span></button>
+        </div>
     </div>
 
     <div class="content">
@@ -86,6 +95,6 @@
     <audio id="redSound" src="./assets/music/sound2.mp3" preload="auto"></audio>
 
     <!-- Script externe -->
-    <script src="./horloge_1.js"></script>
+    <script src="horloge_1.js"></script>
 </body>
 </html>

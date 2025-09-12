@@ -1,3 +1,4 @@
+// Effet Matrix
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -48,6 +49,7 @@ window.addEventListener('resize', () => {
     }
 });
 
+// Horloge
 function updateClock() {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
@@ -195,5 +197,84 @@ window.addEventListener('load', function() {
 window.addEventListener('load', function() {
     if (!blueSound || !redSound) {
         console.log("Les fichiers audio ne sont pas chargés");
+    }
+});
+
+// Fonctionnalités plein écran
+const fullscreenButton = document.getElementById('fullscreenButton');
+        
+// Fonction pour activer le mode plein écran
+function openFullscreen() {
+    const elem = document.documentElement;
+    
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
+
+// Fonction pour quitter le mode plein écran
+function closeFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+}
+
+// Événements pour le bouton plein écran
+fullscreenButton.addEventListener('click', function() {
+    if (!document.fullscreenElement && 
+        !document.webkitFullscreenElement && 
+        !document.mozFullScreenElement &&
+        !document.msFullscreenElement) {
+        openFullscreen();
+        fullscreenButton.textContent = "⛶";
+    } else {
+        closeFullscreen();
+        fullscreenButton.textContent = "⛶";
+    }
+});
+
+// Écouter les changements de mode plein écran
+document.addEventListener('fullscreenchange', handleFullscreenChange);
+document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+function handleFullscreenChange() {
+    if (document.fullscreenElement || 
+        document.webkitFullscreenElement || 
+        document.mozFullScreenElement ||
+        document.msFullscreenElement) {
+        console.log("Mode plein écran activé");
+        fullscreenButton.textContent = "⛶";
+    } else {
+        console.log("Mode plein écran désactivé");
+        fullscreenButton.textContent = "⛶";
+    }
+}
+
+// Fonctionnalités de zoom
+const zoomInButton = document.getElementById('zoomIn');
+const zoomOutButton = document.getElementById('zoomOut');
+let currentZoom = 100;
+
+zoomInButton.addEventListener('click', function() {
+    if (currentZoom < 150) {
+        currentZoom += 10;
+        document.body.style.zoom = currentZoom + '%';
+    }
+});
+
+zoomOutButton.addEventListener('click', function() {
+    if (currentZoom > 70) {
+        currentZoom -= 10;
+        document.body.style.zoom = currentZoom + '%';
     }
 });
