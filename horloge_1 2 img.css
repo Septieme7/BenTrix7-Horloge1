@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+}
+
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.clock-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.digital-clock {
+    font-size: 12rem;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.5), 0 0 30px rgba(0, 255, 0, 0.3);
+    letter-spacing: 5px;
+    line-height: 1;
+}
+
+.centiseconds {
+    font-size: 6rem;
+    vertical-align: top;
+    margin-left: 10px;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+    animation: matrixRain 0.5s linear infinite;
+}
+
+.logo-container {
+    margin: 20px 0;
+    text-align: center;
+    position: relative;
+    height: 120px;
+    display: flex;
+    align-items: center;      /* centrer verticalement */
+    justify-content: center;  /* centrer horizontalement */
+    gap: 40px;                /* espace horizontal entre images */
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.logo-side {
+    max-width: 200px;
+    height: auto;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.logo-side.show {
+    opacity: 1;
+}
+
+
+.rabbit-container {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    overflow: visible;
+    margin-bottom: 20px;
+}
+
+.rabbit {
+    position: absolute;
+    right: -150px; /* départ hors écran à droite */
+    bottom: 0;
+    animation: jumpRabbit 6s linear forwards;
+}
+
+/* Animation effet "Matrix" */
+@keyframes matrixRain {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
+
+/* Animation saut du lapin AVANT le logo */
+@keyframes jumpRabbit {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    30% {
+        transform: translateX(-35vw) translateY(0);
+    }
+    40% {
+        transform: translateX(-42vw) translateY(-120px); /* saute avant le logo */
+    }
+    50% {
+        transform: translateX(-48vw) translateY(0); /* retombe devant le logo */
+    }
+    100% {
+        transform: translateX(-100vw) translateY(0); /* part à gauche */
+    }
+}

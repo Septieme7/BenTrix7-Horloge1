@@ -1,0 +1,220 @@
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    background-color: #000;
+}
+
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.clock-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.digital-clock {
+    font-size: 12rem;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.5), 0 0 30px rgba(0, 255, 0, 0.3);
+    letter-spacing: 5px;
+    line-height: 1;
+}
+
+.centiseconds {
+    font-size: 6rem;
+    vertical-align: top;
+    margin-left: 10px;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+    animation: matrixRain 0.5s linear infinite;
+}
+
+.logo-container {
+    margin: 20px 0;
+    text-align: center;
+    position: relative;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.rabbit-container {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    overflow: visible;
+    margin-bottom: 20px;
+}
+
+.rabbit {
+    position: absolute;
+    right: -150px;
+    bottom: 0;
+    animation: jumpRabbit 6s linear infinite;
+}
+
+/* Styles pour la pilule Matrix ROUGE */
+.pill-container.red-pill .matrix-pill {
+    background: linear-gradient(145deg, #b30000, #ff0000);
+    box-shadow: 
+        0 0 15px rgba(255, 0, 0, 0.7),
+        0 0 30px rgba(255, 0, 0, 0.5),
+        inset 10px 0 20px rgba(255, 100, 100, 0.8),
+        inset -10px 0 20px rgba(180, 0, 0, 0.8);
+}
+
+/* Styles pour la pilule Matrix BLEUE */
+.pill-container.blue-pill .matrix-pill {
+    background: linear-gradient(145deg, #0066cc, #0099ff);
+    box-shadow: 
+        0 0 15px rgba(0, 102, 204, 0.7),
+        0 0 30px rgba(0, 153, 255, 0.5),
+        inset 10px 0 20px rgba(100, 180, 255, 0.8),
+        inset -10px 0 20px rgba(0, 80, 180, 0.8);
+}
+
+.pill-container {
+    position: relative;
+    width: 150px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.matrix-pill {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 35px;
+    overflow: hidden;
+    transform: rotate(-10deg);
+}
+
+.matrix-pill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 40%, rgba(255, 255, 255, 0.2) 50%, transparent 60%),
+        repeating-linear-gradient(0deg, 
+            rgba(0, 0, 0, 0.1) 0px, 
+            rgba(0, 0, 0, 0.1) 1px, 
+            transparent 1px, 
+            transparent 4px);
+    border-radius: 35px;
+}
+
+.pill-divider {
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+.matrix-code {
+    position: absolute;
+    bottom: -20px;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 8px;
+    text-shadow: 0 0 5px #00ff00;
+    opacity: 0.7;
+    width: 100%;
+    text-align: center;
+}
+
+/* Animation effet "Matrix" */
+@keyframes matrixRain {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
+
+/* Animation saut du lapin */
+@keyframes jumpRabbit {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    30% {
+        transform: translateX(-35vw) translateY(0);
+    }
+    40% {
+        transform: translateX(-42vw) translateY(-120px);
+    }
+    50% {
+        transform: translateX(-48vw) translateY(0);
+    }
+    100% {
+        transform: translateX(-100vw) translateY(0);
+    }
+}
+
+
+/* Compte à rebours */
+.countdown-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    text-align: right;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.countdown-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #00ff00, #00cc00, #00ff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.countdown {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
