@@ -69,19 +69,23 @@ rabbit.style.animation = 'jumpRabbit 6s linear infinite';
 // Fonctions pour les sons
 function playSound(pillType) {
     if (pillType === 'blue') {
-        blueSound.currentTime = 0;
-        blueSound.play();
+        if (blueSound) {
+            blueSound.currentTime = 0;
+            blueSound.play().catch(e => console.log("Erreur lecture son bleu:", e));
+        }
     } else if (pillType === 'red') {
-        redSound.currentTime = 0;
-        redSound.play();
+        if (redSound) {
+            redSound.currentTime = 0;
+            redSound.play().catch(e => console.log("Erreur lecture son rouge:", e));
+        }
     }
 }
 
 function stopSound(pillType) {
-    if (pillType === 'blue') {
+    if (pillType === 'blue' && blueSound) {
         blueSound.pause();
         blueSound.currentTime = 0;
-    } else if (pillType === 'red') {
+    } else if (pillType === 'red' && redSound) {
         redSound.pause();
         redSound.currentTime = 0;
     }
@@ -110,3 +114,86 @@ function updateCountdown() {
 // Démarrer le compte à rebours
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+// Favicon animée style Matrix
+function createAnimatedFavicon() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 32;
+    canvas.height = 32;
+    const ctx = canvas.getContext('2d');
+    
+    let favicon = document.getElementById('animatedFavicon');
+    let characters = '01';
+    let drops = [];
+    
+    // Initialiser les drops
+    for (let i = 0; i < 10; i++) {
+        drops.push({
+            x: Math.random() * 32,
+            y: Math.random() * -100,
+            speed: 2 + Math.random() * 3
+        });
+    }
+    
+    function animateFavicon() {
+        // Fond semi-transparent pour effet de traînée
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        ctx.fillRect(0, 0, 32, 32);
+        
+        // Dessiner les caractères qui tombent
+        ctx.font = '12px monospace';
+        
+        for (let i = 0; i < drops.length; i++) {
+            const char = characters[Math.floor(Math.random() * characters.length)];
+            
+            // Dégradé de vert
+            const greenValue = Math.floor(100 + Math.random() * 155);
+            ctx.fillStyle = `rgb(0, ${greenValue}, 0)`;
+            
+            ctx.fillText(char, drops[i].x, drops[i].y);
+            
+            // Déplacer le drop
+            drops[i].y += drops[i].speed;
+            
+            // Réinitialiser si hors écran
+            if (drops[i].y > 32) {
+                drops[i].y = Math.random() * -20;
+                drops[i].x = Math.random() * 32;
+                drops[i].speed = 2 + Math.random() * 3;
+            }
+        }
+        
+        // Quelques pixels verts statiques pour le fond
+        for (let i = 0; i < 5; i++) {
+            const x = Math.random() * 32;
+            const y = Math.random() * 32;
+            const greenValue = Math.floor(50 + Math.random() * 50);
+            ctx.fillStyle = `rgb(0, ${greenValue}, 0)`;
+            ctx.fillRect(x, y, 1, 1);
+        }
+        
+        // Mettre à jour la favicon
+        if (favicon) {
+            favicon.href = canvas.toDataURL('image/png');
+        }
+        
+        // Continuer l'animation
+        requestAnimationFrame(animateFavicon);
+    }
+    
+    // Démarrer l'animation
+    animateFavicon();
+}
+
+// Démarrer l'animation de la favicon au chargement
+window.addEventListener('load', function() {
+    // Petit délai pour éviter de surcharger le chargement
+    setTimeout(createAnimatedFavicon, 1000);
+});
+
+// Gestion des erreurs de chargement des sons
+window.addEventListener('load', function() {
+    if (!blueSound || !redSound) {
+        console.log("Les fichiers audio ne sont pas chargés");
+    }
+});
