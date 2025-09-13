@@ -40,7 +40,7 @@ function drawMatrix() {
 
 setInterval(drawMatrix, 100);
 
-window.addEventListener('resize', () => {
+window.addEventListener('resize', () => {  // Correction ici: ajout de =>
     resizeCanvas();
     columns = canvas.width / fontSize;
     drops.length = 0;
@@ -66,9 +66,7 @@ setInterval(updateClock, 10);
 
 // Animation d'un seul lapin qui se répète
 const rabbit = document.querySelector('.rabbit');
-if (rabbit) {
-    rabbit.style.animation = 'jumpRabbit 6s linear infinite';
-}
+rabbit.style.animation = 'jumpRabbit 6s linear infinite';
 
 // Fonctions pour les sons
 function playSound(pillType) {
@@ -94,10 +92,6 @@ function stopSound(pillType) {
         redSound.currentTime = 0;
     }
 }
-
-// Rendre les fonctions globales pour les événements HTML
-window.playSound = playSound;
-window.stopSound = stopSound;
 
 // Compte à rebours jusqu'au 29 mai 2026 17h00
 function updateCountdown() {
@@ -234,20 +228,18 @@ function closeFullscreen() {
 }
 
 // Événements pour le bouton plein écran
-if (fullscreenButton) {
-    fullscreenButton.addEventListener('click', function() {
-        if (!document.fullscreenElement && 
-            !document.webkitFullscreenElement && 
-            !document.mozFullScreenElement &&
-            !document.msFullscreenElement) {
-            openFullscreen();
-            fullscreenButton.textContent = "⛶";
-        } else {
-            closeFullscreen();
-            fullscreenButton.textContent = "⛶";
-        }
-    });
-}
+fullscreenButton.addEventListener('click', function() {
+    if (!document.fullscreenElement && 
+        !document.webkitFullscreenElement && 
+        !document.mozFullScreenElement &&
+        !document.msFullscreenElement) {
+        openFullscreen();
+        fullscreenButton.textContent = "⛶";
+    } else {
+        closeFullscreen();
+        fullscreenButton.textContent = "⛶";
+    }
+});
 
 // Écouter les changements de mode plein écran
 document.addEventListener('fullscreenchange', handleFullscreenChange);
@@ -261,10 +253,10 @@ function handleFullscreenChange() {
         document.mozFullScreenElement ||
         document.msFullscreenElement) {
         console.log("Mode plein écran activé");
-        if (fullscreenButton) fullscreenButton.textContent = "⛶";
+        fullscreenButton.textContent = "⛶";
     } else {
         console.log("Mode plein écran désactivé");
-        if (fullscreenButton) fullscreenButton.textContent = "⛶";
+        fullscreenButton.textContent = "⛶";
     }
 }
 
@@ -273,20 +265,16 @@ const zoomInButton = document.getElementById('zoomIn');
 const zoomOutButton = document.getElementById('zoomOut');
 let currentZoom = 100;
 
-if (zoomInButton) {
-    zoomInButton.addEventListener('click', function() {
-        if (currentZoom < 150) {
-            currentZoom += 10;
-            document.body.style.zoom = currentZoom + '%';
-        }
-    });
-}
+zoomInButton.addEventListener('click', function() {
+    if (currentZoom < 150) {
+        currentZoom += 10;
+        document.body.style.zoom = currentZoom + '%';
+    }
+});
 
-if (zoomOutButton) {
-    zoomOutButton.addEventListener('click', function() {
-        if (currentZoom > 70) {
-            currentZoom -= 10;
-            document.body.style.zoom = currentZoom + '%';
-        }
-    });
-}
+zoomOutButton.addEventListener('click', function() {
+    if (currentZoom > 70) {
+        currentZoom -= 10;
+        document.body.style.zoom = currentZoom + '%';
+    }
+});
