@@ -29,14 +29,70 @@ body {
     height: 100vh;
     box-sizing: border-box;
     padding: 20px;
+    gap: 30px;
+}
+
+/* Ordre fixe pour tous les éléments */
+.countdown-container {
+    order: 1; /* TOUJOURS EN PREMIER */
+    text-align: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    min-width: 300px;
+    max-width: 90%;
 }
 
 .clock-container {
+    order: 2; /* TOUJOURS EN DEUXIÈME - SOUS LE COMPTE À REBOURS */
     text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
 }
 
+.logo-container {
+    order: 3; /* TOUJOURS EN TROISIÈME */
+    text-align: center;
+    position: relative;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.rabbit-container {
+    order: 4; /* TOUJOURS EN DERNIER */
+    position: relative;
+    width: 100%;
+    height: 120px;
+    overflow: visible;
+}
+
+/* Styles du compte à rebours */
+.countdown-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #00ff00, #00cc00, #00ff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.countdown {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+/* Styles de l'horloge */
 .digital-clock {
     font-size: 12rem;
     font-weight: bold;
@@ -55,18 +111,7 @@ body {
     animation: matrixRain 0.5s linear infinite;
 }
 
-.logo-container {
-    margin: 20px 0;
-    text-align: center;
-    position: relative;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-
+/* Styles du logo */
 .logo {
     max-width: 200px;
     height: auto;
@@ -75,19 +120,11 @@ body {
     z-index: 1;
 }
 
-/* Animation du logo */
 #animatedLogo {
-    animation: jackInTheBox 2s ease-in-out, hinge 2s ease-in-out 5s forwards;
+    animation: jackInTheBox 2s ease-in-out, hinge 4s ease-in-out 15s forwards;
 }
 
-.rabbit-container {
-    position: relative;
-    width: 100%;
-    height: 120px;
-    overflow: visible;
-    margin-bottom: 20px;
-}
-
+/* Styles du lapin */
 .rabbit {
     position: absolute;
     right: -150px;
@@ -95,7 +132,7 @@ body {
     animation: jumpRabbit 6s linear infinite;
 }
 
-/* Styles pour la pilule Matrix ROUGE */
+/* Styles pour les pilules Matrix ROUGE */
 .pill-container.red-pill .matrix-pill {
     background: linear-gradient(145deg, #b30000, #ff0000);
     box-shadow: 
@@ -105,7 +142,7 @@ body {
         inset -10px 0 20px rgba(180, 0, 0, 0.8);
 }
 
-/* Styles pour la pilule Matrix BLEUE */
+/* Styles pour les pilules Matrix BLEUE */
 .pill-container.blue-pill .matrix-pill {
     background: linear-gradient(145deg, #0066cc, #0099ff);
     box-shadow: 
@@ -203,41 +240,6 @@ body {
     }
 }
 
-/* Compte à rebours */
-.countdown-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 2;
-    text-align: right;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid #00ff00;
-    border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-}
-
-.countdown-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #00ff00;
-    text-shadow: 0 0 5px #00ff00;
-    margin-bottom: 10px;
-    background: linear-gradient(90deg, #00ff00, #00cc00, #00ff00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.countdown {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #00ff00;
-    text-shadow: 0 0 5px #00ff00;
-    font-family: 'Courier New', monospace;
-    letter-spacing: 1px;
-}
-
 /* Bouton plein écran style Matrix */
 .fullscreen-controls {
     position: fixed;
@@ -292,14 +294,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease; /* Ajout pour fluidifier le bouton entier */
+    transition: all 0.3s ease;
     position: relative;
 }
 
 .zoom-btn span {
     display: block;
     transition: transform 1.2s ease;
-    /* Pas de rotation par défaut */
 }
 
 .zoom-btn:hover {
@@ -309,12 +310,12 @@ body {
 
 /* Rotation spécifique pour le bouton + (zoom in) */
 #zoomIn:hover span {
-    transform: rotate(360deg); /* Tour complet pour plus de visibilité, ou gardez 25deg si préféré */
+    transform: rotate(360deg);
 }
 
 /* Rotation spécifique pour le bouton - (zoom out) */
 #zoomOut:hover span {
-    transform: rotate(-360deg); /* Tour dans l'autre sens pour différencier */
+    transform: rotate(-360deg);
 }
 
 /* Animation de pulsation pour les boutons zoom */
@@ -334,81 +335,7 @@ body {
     animation: pulse-green 2s infinite;
 }
 
-/* Version responsive pour les boutons zoom */
-@media screen and (max-width: 768px) {
-    .zoom-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 1.1rem;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .zoom-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-    }
-}
-
-@media screen and (min-width: 2000px) {
-    .zoom-btn {
-        width: 60px;
-        height: 60px;
-        font-size: 1.8rem;
-    }
-}
-
-
-
 /* Bouton SoundBoard7 LIEN vers autre site */
-.soundboard-btn {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(145deg, #00cc00, #00ff00);
-    border: 2px solid #00ff00;
-    color: #000;
-    font-weight: bold;
-    font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-    z-index: 10;
-    text-decoration: none;
-}
-
-.soundboard-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
-}
-
-/* Adaptation pour mobile */
-@media screen and (max-width: 768px) {
-    .soundboard-btn {
-        right: 140px;
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .soundboard-btn {
-        right: 120px;
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-}
-
-/* Conteneur pour le bouton et l'overlay */
 .soundboard-btn-container {
     position: fixed;
     bottom: 20px;
@@ -416,7 +343,6 @@ body {
     z-index: 10;
 }
 
-/* Style du bouton (inchangé) */
 .soundboard-btn {
     width: 50px;
     height: 50px;
@@ -469,37 +395,15 @@ body {
     visibility: visible;
 }
 
-/* Adaptation pour mobile */
-@media screen and (max-width: 768px) {
-    .soundboard-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
-    }
-    .soundboard-overlay {
-        width: 160px;
-        bottom: 55px;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .soundboard-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-    .soundboard-overlay {
-        width: 140px;
-        bottom: 50px;
-    }
-}
-
-
-
 /* ==================== RESPONSIVE 2025 ==================== */
 
 /* Tablettes (768px - 1024px) */
 @media screen and (max-width: 1024px) {
+    .content {
+        gap: 25px;
+        padding: 15px;
+    }
+
     .digital-clock {
         font-size: 8rem;
     }
@@ -510,6 +414,7 @@ body {
     
     .logo-container {
         gap: 30px;
+        height: 100px;
     }
     
     .logo {
@@ -522,9 +427,8 @@ body {
     }
     
     .countdown-container {
-        top: 15px;
-        right: 15px;
         padding: 12px;
+        min-width: 250px;
     }
     
     .countdown-title {
@@ -538,6 +442,13 @@ body {
 
 /* Grands smartphones (576px - 768px) */
 @media screen and (max-width: 768px) {
+    .content {
+        gap: 20px;
+        padding: 10px;
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+
     .digital-clock {
         font-size: 6rem;
         letter-spacing: 3px;
@@ -551,8 +462,7 @@ body {
     .logo-container {
         flex-direction: column;
         height: auto;
-        gap: 20px;
-        margin: 15px 0;
+        gap: 15px;
     }
     
     .logo {
@@ -576,10 +486,8 @@ body {
     }
     
     .countdown-container {
-        top: 10px;
-        right: 10px;
         padding: 10px;
-        text-align: center;
+        min-width: 200px;
     }
     
     .countdown-title {
@@ -589,16 +497,6 @@ body {
     
     .countdown {
         font-size: 1.1rem;
-    }
-    
-    .content {
-        padding: 15px;
-        justify-content: flex-start;
-        padding-top: 80px;
-    }
-    
-    .clock-container {
-        margin-bottom: 15px;
     }
     
     .fullscreen-controls {
@@ -617,10 +515,27 @@ body {
         height: 35px;
         font-size: 1.1rem;
     }
+
+    .soundboard-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+
+    .soundboard-overlay {
+        width: 160px;
+        bottom: 55px;
+    }
 }
 
 /* Petits smartphones (320px - 576px) */
 @media screen and (max-width: 576px) {
+    .content {
+        gap: 15px;
+        padding: 5px;
+        padding-top: 15px;
+    }
+
     .digital-clock {
         font-size: 4rem;
         letter-spacing: 2px;
@@ -652,12 +567,8 @@ body {
     }
     
     .countdown-container {
-        position: relative;
-        top: 0;
-        right: 0;
-        margin: 10px auto;
-        width: 90%;
-        max-width: 300px;
+        padding: 8px;
+        min-width: 180px;
     }
     
     .countdown-title {
@@ -666,11 +577,6 @@ body {
     
     .countdown {
         font-size: 1rem;
-    }
-    
-    .content {
-        padding-top: 20px;
-        justify-content: flex-start;
     }
     
     .fullscreen-controls {
@@ -688,6 +594,17 @@ body {
         width: 30px;
         height: 30px;
         font-size: 1rem;
+    }
+
+    .soundboard-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .soundboard-overlay {
+        width: 140px;
+        bottom: 50px;
     }
     
     @keyframes jumpRabbitMobile {
@@ -711,6 +628,10 @@ body {
 
 /* Très petits écrans (moins de 320px) */
 @media screen and (max-width: 320px) {
+    .content {
+        gap: 10px;
+    }
+
     .digital-clock {
         font-size: 3rem;
     }
@@ -732,6 +653,10 @@ body {
         font-size: 4px;
     }
     
+    .countdown-container {
+        min-width: 160px;
+    }
+    
     .countdown-title {
         font-size: 0.8rem;
     }
@@ -744,7 +669,8 @@ body {
 /* Mode paysage sur mobile */
 @media screen and (max-height: 500px) and (orientation: landscape) {
     .content {
-        padding-top: 60px;
+        gap: 10px;
+        padding: 5px;
         justify-content: flex-start;
     }
     
@@ -757,7 +683,7 @@ body {
     }
     
     .logo-container {
-        margin: 10px 0;
+        height: 60px;
     }
     
     .logo {
@@ -765,13 +691,20 @@ body {
     }
     
     .rabbit-container {
-        height: 80px;
-        margin-bottom: 10px;
+        height: 60px;
+    }
+    
+    .countdown-container {
+        padding: 5px;
     }
 }
 
 /* Écrans très larges (4K et plus) */
 @media screen and (min-width: 2000px) {
+    .content {
+        gap: 50px;
+    }
+
     .digital-clock {
         font-size: 16rem;
     }
@@ -796,8 +729,7 @@ body {
     
     .countdown-container {
         padding: 20px;
-        top: 30px;
-        right: 30px;
+        min-width: 400px;
     }
     
     .countdown-title {
