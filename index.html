@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horloge BenTrix7</title>
-    
+
     <!-- Favicon animée -->
     <link rel="icon" href="#" id="animatedFavicon">
-    
+
     <!-- Fichier CSS externe -->
     <link rel="stylesheet" href="horloge_1.css">
+
+    <!-- animate.css via CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
     <!-- Canvas pour l'effet Matrix -->
@@ -17,8 +20,8 @@
 
     <!-- Compte à rebours -->
     <div class="countdown-container">
-        <div class="countdown-title">The End of FORMATION...</div>
-        <div id="countdown" class="countdown"></div>
+        <div class="countdown-title animate__animated animate__fadeInDown">The End of FORMATION...</div>
+        <div id="countdown" class="countdown animate__animated animate__fadeIn"></div>
     </div>
 
     <!-- Contrôles plein écran et zoom -->
@@ -33,7 +36,7 @@
     <div class="content">
         <!-- Horloge -->
         <div class="clock-container">
-            <div id="clock" class="digital-clock"></div>
+            <div id="clock" class="digital-clock animate__animated animate__fadeIn"></div>
         </div>
 
         <!-- Zone logo + images cachées -->
@@ -45,10 +48,15 @@
                 </div>
                 <div class="matrix-code">01000010 01101100 01110101 01100101</div>
             </div>
-            
-            <!-- Logo central -->
-            <img src="./assets/images/logo.png" alt="Logo" class="logo">
-            
+
+            <!-- Logo central avec animations -->
+            <img
+                src="./assets/images/logo.png"
+                alt="Logo"
+                class="logo"
+                id="animatedLogo"
+            >
+
             <!-- Pilule Matrix ROUGE à droite -->
             <div class="pill-container red-pill" onmouseover="playSound('red')" onmouseout="stopSound('red')">
                 <div class="matrix-pill">
@@ -59,7 +67,7 @@
         </div>
 
         <!-- Lapin -->
-        <div class="rabbit-container">
+        <div class="rabbit-container animate__animated animate__fadeInUp">
             <svg class="rabbit" viewBox="0 0 150 80" width="150" height="80">
                 <!-- Oreille gauche -->
                 <path d="M20,10 Q10,0 15,40 L20,10 Z" fill="white" stroke="black" stroke-width="0.5"/>
@@ -96,5 +104,16 @@
 
     <!-- Script externe -->
     <script src="horloge_1.js"></script>
+
+<!-- Bouton vers SoundBoard7 avec overlay -->
+<div class="soundboard-btn-container">
+    <a href="https://septieme7.github.io/SoundBoard7/" target="_blank" class="soundboard-btn" title="SoundBoard7">
+        <span>🎵</span>
+    </a>
+    <div class="soundboard-overlay">
+        <img src="/assets/images/Pegi18.jpg" alt="Aperçu SoundBoard7" class="soundboard-preview">
+    </div>
+</div>
+
 </body>
 </html>

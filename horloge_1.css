@@ -75,6 +75,11 @@ body {
     z-index: 1;
 }
 
+/* Animation du logo */
+#animatedLogo {
+    animation: jackInTheBox 2s ease-in-out, hinge 2s ease-in-out 5s forwards;
+}
+
 .rabbit-container {
     position: relative;
     width: 100%;
@@ -353,6 +358,143 @@ body {
         font-size: 1.8rem;
     }
 }
+
+
+
+/* Bouton SoundBoard7 LIEN vers autre site */
+.soundboard-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #00cc00, #00ff00);
+    border: 2px solid #00ff00;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    text-decoration: none;
+}
+
+.soundboard-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
+}
+
+/* Adaptation pour mobile */
+@media screen and (max-width: 768px) {
+    .soundboard-btn {
+        right: 140px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .soundboard-btn {
+        right: 120px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Conteneur pour le bouton et l'overlay */
+.soundboard-btn-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+/* Style du bouton (inchangé) */
+.soundboard-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #00cc00, #00ff00);
+    border: 2px solid #00ff00;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+}
+
+.soundboard-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
+}
+
+/* Overlay (masqué par défaut) */
+.soundboard-overlay {
+    position: absolute;
+    bottom: 60px; /* Position au-dessus du bouton */
+    left: 0;
+    width: 200px;
+    height: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    z-index: 11;
+}
+
+.soundboard-preview {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+}
+
+/* Afficher l'overlay au survol */
+.soundboard-btn-container:hover .soundboard-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Adaptation pour mobile */
+@media screen and (max-width: 768px) {
+    .soundboard-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+    .soundboard-overlay {
+        width: 160px;
+        bottom: 55px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .soundboard-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    .soundboard-overlay {
+        width: 140px;
+        bottom: 50px;
+    }
+}
+
+
 
 /* ==================== RESPONSIVE 2025 ==================== */
 
