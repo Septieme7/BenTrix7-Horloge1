@@ -1,7 +1,6 @@
 // Effet Matrix
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
-
 // Variables pour les sons
 let blueSound = document.getElementById('blueSound');
 let redSound = document.getElementById('redSound');
@@ -15,7 +14,6 @@ resizeCanvas();
 const text = "LA Plateforme_";
 const fontSize = 16;
 let columns = canvas.width / fontSize;
-
 const drops = [];
 for (let i = 0; i < columns; i++) {
     drops[i] = Math.random() * -100;
@@ -25,22 +23,19 @@ function drawMatrix() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.font = `${fontSize}px monospace`;
-
     for (let i = 0; i < drops.length; i++) {
         ctx.fillStyle = (i % 10 === 0) ? '#f00' : '#0f0';
         const char = text[Math.floor(Math.random() * text.length)];
         ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.98) {
             drops[i] = 0;
         }
         drops[i]++;
     }
 }
-
 setInterval(drawMatrix, 100);
 
-window.addEventListener('resize', () => {  // Correction ici: ajout de =>
+window.addEventListener('resize', () => {
     resizeCanvas();
     columns = canvas.width / fontSize;
     drops.length = 0;
@@ -56,17 +51,18 @@ function updateClock() {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
     const centiseconds = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');
-
     document.getElementById('clock').innerHTML =
         `${hours}:${minutes}:${seconds}<span class="centiseconds">.${centiseconds}</span>`;
 }
-
 updateClock();
 setInterval(updateClock, 10);
 
 // Animation d'un seul lapin qui se répète
+// Animation du lapin
 const rabbit = document.querySelector('.rabbit');
-rabbit.style.animation = 'jumpRabbit 6s linear infinite';
+if (rabbit) {
+    rabbit.style.animation = 'jumpRabbit 6s linear infinite';
+}
 
 // Fonctions pour les sons
 function playSound(pillType) {
@@ -98,21 +94,17 @@ function updateCountdown() {
     const targetDate = new Date('2026-05-29T17:00:00');
     const now = new Date();
     const difference = targetDate - now;
-
     if (difference <= 0) {
         document.getElementById('countdown').innerHTML = "FORMATION TERMINÉE!";
         return;
     }
-
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-    document.getElementById('countdown').innerHTML = 
+    document.getElementById('countdown').innerHTML =
         `${days}j ${hours}h ${minutes}m ${seconds}s`;
 }
-
 // Démarrer le compte à rebours
 updateCountdown();
 setInterval(updateCountdown, 1000);
@@ -123,11 +115,11 @@ function createAnimatedFavicon() {
     canvas.width = 32;
     canvas.height = 32;
     const ctx = canvas.getContext('2d');
-    
+
     let favicon = document.getElementById('animatedFavicon');
     let characters = '01';
     let drops = [];
-    
+
     // Initialiser les drops
     for (let i = 0; i < 10; i++) {
         drops.push({
@@ -136,27 +128,27 @@ function createAnimatedFavicon() {
             speed: 2 + Math.random() * 3
         });
     }
-    
+
     function animateFavicon() {
         // Fond semi-transparent pour effet de traînée
         ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
         ctx.fillRect(0, 0, 32, 32);
-        
+
         // Dessiner les caractères qui tombent
         ctx.font = '12px monospace';
-        
+
         for (let i = 0; i < drops.length; i++) {
             const char = characters[Math.floor(Math.random() * characters.length)];
-            
+
             // Dégradé de vert
             const greenValue = Math.floor(100 + Math.random() * 155);
             ctx.fillStyle = `rgb(0, ${greenValue}, 0)`;
-            
+
             ctx.fillText(char, drops[i].x, drops[i].y);
-            
+
             // Déplacer le drop
             drops[i].y += drops[i].speed;
-            
+
             // Réinitialiser si hors écran
             if (drops[i].y > 32) {
                 drops[i].y = Math.random() * -20;
@@ -164,7 +156,7 @@ function createAnimatedFavicon() {
                 drops[i].speed = 2 + Math.random() * 3;
             }
         }
-        
+
         // Quelques pixels verts statiques pour le fond
         for (let i = 0; i < 5; i++) {
             const x = Math.random() * 32;
@@ -173,16 +165,16 @@ function createAnimatedFavicon() {
             ctx.fillStyle = `rgb(0, ${greenValue}, 0)`;
             ctx.fillRect(x, y, 1, 1);
         }
-        
+
         // Mettre à jour la favicon
         if (favicon) {
             favicon.href = canvas.toDataURL('image/png');
         }
-        
+
         // Continuer l'animation
         requestAnimationFrame(animateFavicon);
     }
-    
+
     // Démarrer l'animation
     animateFavicon();
 }
@@ -202,11 +194,11 @@ window.addEventListener('load', function() {
 
 // Fonctionnalités plein écran
 const fullscreenButton = document.getElementById('fullscreenButton');
-        
+
 // Fonction pour activer le mode plein écran
 function openFullscreen() {
     const elem = document.documentElement;
-    
+
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) { /* Safari */
@@ -229,8 +221,8 @@ function closeFullscreen() {
 
 // Événements pour le bouton plein écran
 fullscreenButton.addEventListener('click', function() {
-    if (!document.fullscreenElement && 
-        !document.webkitFullscreenElement && 
+    if (!document.fullscreenElement &&
+        !document.webkitFullscreenElement &&
         !document.mozFullScreenElement &&
         !document.msFullscreenElement) {
         openFullscreen();
@@ -248,8 +240,8 @@ document.addEventListener('mozfullscreenchange', handleFullscreenChange);
 document.addEventListener('MSFullscreenChange', handleFullscreenChange);
 
 function handleFullscreenChange() {
-    if (document.fullscreenElement || 
-        document.webkitFullscreenElement || 
+    if (document.fullscreenElement ||
+        document.webkitFullscreenElement ||
         document.mozFullScreenElement ||
         document.msFullscreenElement) {
         console.log("Mode plein écran activé");

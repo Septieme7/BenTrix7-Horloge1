@@ -1,3 +1,16 @@
+:root {
+    --matrix-green: #00ff00;
+    --matrix-green-dark: #00cc00;
+    --matrix-red: #ff0000;
+    --matrix-red-dark: #b30000;
+    --matrix-blue: #0099ff;
+    --matrix-blue-dark: #0066cc;
+    --shadow-green: 0 0 15px rgba(0, 255, 0, 0.7);
+    --shadow-red: 0 0 15px rgba(255, 0, 0, 0.7);
+    --shadow-blue: 0 0 15px rgba(0, 153, 255, 0.7);
+    --transition: all 0.3s ease;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -33,51 +46,36 @@ body {
 }
 
 /* Ordre fixe pour tous les éléments */
-.countdown-container {
-    order: 1; /* TOUJOURS EN PREMIER */
+.countdown-container { order: 1; }
+.clock-container { order: 2; }
+.logo-container { order: 3; }
+.rabbit-container { order: 4; }
+
+/* Styles communs aux conteneurs */
+.countdown-container,
+.clock-container,
+.logo-container,
+.rabbit-container {
     text-align: center;
+}
+
+.countdown-container {
     padding: 15px;
     background: rgba(0, 0, 0, 0.7);
-    border: 1px solid #00ff00;
+    border: 1px solid var(--matrix-green);
     border-radius: 5px;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    box-shadow: var(--shadow-green);
     min-width: 300px;
     max-width: 90%;
 }
 
-.clock-container {
-    order: 2; /* TOUJOURS EN DEUXIÈME - SOUS LE COMPTE À REBOURS */
-    text-align: center;
-}
-
-.logo-container {
-    order: 3; /* TOUJOURS EN TROISIÈME */
-    text-align: center;
-    position: relative;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-
-.rabbit-container {
-    order: 4; /* TOUJOURS EN DERNIER */
-    position: relative;
-    width: 100%;
-    height: 120px;
-    overflow: visible;
-}
-
-/* Styles du compte à rebours */
 .countdown-title {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #00ff00;
-    text-shadow: 0 0 5px #00ff00;
+    color: var(--matrix-green);
+    text-shadow: var(--shadow-green);
     margin-bottom: 10px;
-    background: linear-gradient(90deg, #00ff00, #00cc00, #00ff00);
+    background: linear-gradient(90deg, var(--matrix-green), var(--matrix-green-dark), var(--matrix-green));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -86,18 +84,20 @@ body {
 .countdown {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #00ff00;
-    text-shadow: 0 0 5px #00ff00;
+    color: var(--matrix-green);
+    text-shadow: var(--shadow-green);
     font-family: 'Courier New', monospace;
     letter-spacing: 1px;
 }
 
-/* Styles de l'horloge */
 .digital-clock {
     font-size: 12rem;
     font-weight: bold;
-    color: #00ff00;
-    text-shadow: 0 0 10px #00ff00, 0 0 20px rgba(0, 255, 0, 0.5), 0 0 30px rgba(0, 255, 0, 0.3);
+    color: var(--matrix-green);
+    text-shadow:
+        0 0 10px var(--matrix-green),
+        0 0 20px rgba(0, 255, 0, 0.5),
+        0 0 30px rgba(0, 255, 0, 0.3);
     letter-spacing: 5px;
     line-height: 1;
 }
@@ -106,12 +106,11 @@ body {
     font-size: 6rem;
     vertical-align: top;
     margin-left: 10px;
-    color: #00ff00;
-    text-shadow: 0 0 10px #00ff00;
+    color: var(--matrix-green);
+    text-shadow: var(--shadow-green);
     animation: matrixRain 0.5s linear infinite;
 }
 
-/* Styles du logo */
 .logo {
     max-width: 200px;
     height: auto;
@@ -124,7 +123,25 @@ body {
     animation: jackInTheBox 2s ease-in-out, hinge 4s ease-in-out 15s forwards;
 }
 
-/* Styles du lapin */
+/* Logo container : alignement horizontal des pilules + logo */
+.logo-container {
+    position: relative;
+    height: 120px;
+    display: flex;
+    flex-direction: row; /* Forcer l'alignement horizontal */
+    align-items: center;
+    justify-content: center;
+    gap: 40px; /* Espacement entre les pilules et le logo */
+    flex-wrap: wrap;
+}
+
+.rabbit-container {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    overflow: visible;
+}
+
 .rabbit {
     position: absolute;
     right: -150px;
@@ -132,26 +149,25 @@ body {
     animation: jumpRabbit 6s linear infinite;
 }
 
-/* Styles pour les pilules Matrix ROUGE */
-.pill-container.red-pill .matrix-pill {
-    background: linear-gradient(145deg, #b30000, #ff0000);
-    box-shadow: 
-        0 0 15px rgba(255, 0, 0, 0.7),
-        0 0 30px rgba(255, 0, 0, 0.5),
-        inset 10px 0 20px rgba(255, 100, 100, 0.8),
-        inset -10px 0 20px rgba(180, 0, 0, 0.8);
+@keyframes jumpRabbit {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    30% {
+        transform: translateX(-35vw) translateY(0);
+    }
+    40% {
+        transform: translateX(-42vw) translateY(-120px);
+    }
+    50% {
+        transform: translateX(-48vw) translateY(0);
+    }
+    100% {
+        transform: translateX(-100vw) translateY(0);
+    }
 }
 
-/* Styles pour les pilules Matrix BLEUE */
-.pill-container.blue-pill .matrix-pill {
-    background: linear-gradient(145deg, #0066cc, #0099ff);
-    box-shadow: 
-        0 0 15px rgba(0, 102, 204, 0.7),
-        0 0 30px rgba(0, 153, 255, 0.5),
-        inset 10px 0 20px rgba(100, 180, 255, 0.8),
-        inset -10px 0 20px rgba(0, 80, 180, 0.8);
-}
-
+/* Styles pour les pilules Matrix */
 .pill-container {
     position: relative;
     width: 150px;
@@ -160,7 +176,7 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: var(--transition);
 }
 
 .pill-container:hover {
@@ -183,12 +199,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
+    background:
         linear-gradient(90deg, transparent 40%, rgba(255, 255, 255, 0.2) 50%, transparent 60%),
-        repeating-linear-gradient(0deg, 
-            rgba(0, 0, 0, 0.1) 0px, 
-            rgba(0, 0, 0, 0.1) 1px, 
-            transparent 1px, 
+        repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.1) 0px,
+            rgba(0, 0, 0, 0.1) 1px,
+            transparent 1px,
             transparent 4px);
     border-radius: 35px;
 }
@@ -206,41 +222,36 @@ body {
 .matrix-code {
     position: absolute;
     bottom: -40px;
-    color: #00ff00;
+    color: var(--matrix-green);
     font-family: 'Courier New', monospace;
     font-size: 10px;
-    text-shadow: 0 0 5px #00ff00;
+    text-shadow: var(--shadow-green);
     opacity: 0.7;
     width: 100%;
     text-align: center;
 }
 
-/* Animation effet "Matrix" */
-@keyframes matrixRain {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-50px); opacity: 0; }
+/* Pilule ROUGE */
+.pill-container.red-pill .matrix-pill {
+    background: linear-gradient(145deg, var(--matrix-red-dark), var(--matrix-red));
+    box-shadow:
+        var(--shadow-red),
+        0 0 30px rgba(255, 0, 0, 0.5),
+        inset 10px 0 20px rgba(255, 100, 100, 0.8),
+        inset -10px 0 20px rgba(180, 0, 0, 0.8);
 }
 
-/* Animation saut du lapin */
-@keyframes jumpRabbit {
-    0% {
-        transform: translateX(0) translateY(0);
-    }
-    30% {
-        transform: translateX(-35vw) translateY(0);
-    }
-    40% {
-        transform: translateX(-42vw) translateY(-120px);
-    }
-    50% {
-        transform: translateX(-48vw) translateY(0);
-    }
-    100% {
-        transform: translateX(-100vw) translateY(0);
-    }
+/* Pilule BLEUE */
+.pill-container.blue-pill .matrix-pill {
+    background: linear-gradient(145deg, var(--matrix-blue-dark), var(--matrix-blue));
+    box-shadow:
+        var(--shadow-blue),
+        0 0 30px rgba(0, 153, 255, 0.5),
+        inset 10px 0 20px rgba(100, 180, 255, 0.8),
+        inset -10px 0 20px rgba(0, 80, 180, 0.8);
 }
 
-/* Bouton plein écran style Matrix */
+/* Boutons plein écran et zoom */
 .fullscreen-controls {
     position: fixed;
     bottom: 20px;
@@ -252,21 +263,26 @@ body {
     gap: 10px;
 }
 
-.fullscreen-btn {
-    width: 50px;
-    height: 50px;
+.fullscreen-btn,
+.zoom-btn,
+.soundboard-btn {
     border-radius: 50%;
-    background: linear-gradient(145deg, #00cc00, #00ff00);
-    border: 2px solid #00ff00;
+    background: linear-gradient(145deg, var(--matrix-green-dark), var(--matrix-green));
+    border: 2px solid var(--matrix-green);
     color: #000;
     font-weight: bold;
-    font-size: 1.2rem;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+    box-shadow: var(--shadow-green);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
+    transition: var(--transition);
+}
+
+.fullscreen-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
 }
 
 .fullscreen-btn:hover {
@@ -274,7 +290,6 @@ body {
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
 }
 
-/* Boutons zoom style Matrix avec rotation à 25° */
 .zoom-controls {
     display: flex;
     gap: 10px;
@@ -283,18 +298,7 @@ body {
 .zoom-btn {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(145deg, #00cc00, #00ff00);
-    border: 2px solid #00ff00;
-    color: #000;
-    font-weight: bold;
     font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
     position: relative;
 }
 
@@ -308,34 +312,25 @@ body {
     box-shadow: 0 0 15px rgba(0, 255, 0, 0.9);
 }
 
-/* Rotation spécifique pour le bouton + (zoom in) */
 #zoomIn:hover span {
     transform: rotate(360deg);
 }
 
-/* Rotation spécifique pour le bouton - (zoom out) */
 #zoomOut:hover span {
     transform: rotate(-360deg);
 }
 
-/* Animation de pulsation pour les boutons zoom */
 @keyframes pulse-green {
-    0% {
-        box-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(0, 255, 0, 0.9), 0 0 30px rgba(0, 255, 0, 0.6);
-    }
-    100% {
-        box-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
-    }
+    0% { box-shadow: var(--shadow-green); }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.9), 0 0 30px rgba(0, 255, 0, 0.6); }
+    100% { box-shadow: var(--shadow-green); }
 }
 
 .zoom-btn {
     animation: pulse-green 2s infinite;
 }
 
-/* Bouton SoundBoard7 LIEN vers autre site */
+/* Bouton SoundBoard7 */
 .soundboard-btn-container {
     position: fixed;
     bottom: 20px;
@@ -346,34 +341,15 @@ body {
 .soundboard-btn {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(145deg, #00cc00, #00ff00);
-    border: 2px solid #00ff00;
-    color: #000;
-    font-weight: bold;
     font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
     text-decoration: none;
-    position: relative;
 }
 
-.soundboard-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
-}
-
-/* Overlay (masqué par défaut) */
 .soundboard-overlay {
     position: absolute;
-    bottom: 60px; /* Position au-dessus du bouton */
+    bottom: 60px;
     left: 0;
     width: 200px;
-    height: auto;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -385,393 +361,144 @@ body {
     width: 100%;
     height: auto;
     border-radius: 8px;
-    border: 1px solid #00ff00;
-    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+    border: 1px solid var(--matrix-green);
+    box-shadow: var(--shadow-green);
 }
 
-/* Afficher l'overlay au survol */
 .soundboard-btn-container:hover .soundboard-overlay {
     opacity: 1;
     visibility: visible;
 }
 
-/* ==================== RESPONSIVE 2025 ==================== */
+/* Animations */
+@keyframes matrixRain {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
 
+@keyframes jumpRabbit {
+    0% { transform: translateX(0) translateY(0); }
+    30% { transform: translateX(-35vw) translateY(0); }
+    40% { transform: translateX(-42vw) translateY(-120px); }
+    50% { transform: translateX(-48vw) translateY(0); }
+    100% { transform: translateX(-100vw) translateY(0); }
+}
+
+/* ==================== RESPONSIVE 2025 ==================== */
 /* Tablettes (768px - 1024px) */
 @media screen and (max-width: 1024px) {
-    .content {
-        gap: 25px;
-        padding: 15px;
-    }
-
-    .digital-clock {
-        font-size: 7.5rem;
-    }
-    
-    .centiseconds {
-        font-size: 4rem;
-    }
-    
-    .logo-container {
-        gap: 30px;
-        height: 100px;
-    }
-    
-    .logo {
-        max-width: 150px;
-    }
-    
-    .pill-container {
-        width: 120px;
-        height: 60px;
-    }
-    
-    .countdown-container {
-        padding: 12px;
-        min-width: 250px;
-    }
-    
-    .countdown-title {
-        font-size: 1.1rem;
-    }
-    
-    .countdown {
-        font-size: 1.3rem;
-    }
+    .content { gap: 25px; padding: 15px; }
+    .digital-clock { font-size: 7.5rem; }
+    .centiseconds { font-size: 4rem; }
+    .logo-container { gap: 30px; height: 100px; }
+    .logo { max-width: 150px; }
+    .pill-container { width: 120px; height: 60px; }
+    .countdown-container { padding: 12px; min-width: 250px; }
+    .countdown-title { font-size: 1.1rem; }
+    .countdown { font-size: 1.3rem; }
 }
 
 /* Grands smartphones (576px - 768px) */
 @media screen and (max-width: 768px) {
-    .content {
-        gap: 20px;
-        padding: 10px;
-        justify-content: flex-start;
-        padding-top: 20px;
-    }
-
-    .digital-clock {
-        font-size: 6rem;
-        letter-spacing: 3px;
-    }
-    
-    .centiseconds {
-        font-size: 3rem;
-        margin-left: 5px;
-    }
-    
-    .logo-container {
-        flex-direction: column;
-        height: auto;
-        gap: 15px;
-    }
-    
-    .logo {
-        max-width: 120px;
-        order: -1;
-    }
-    
-    .pill-container {
-        width: 100px;
-        height: 50px;
-    }
-    
-    .matrix-code {
-        font-size: 6px;
-        bottom: -15px;
-    }
-    
-    .rabbit {
-        width: 120px;
-        height: 64px;
-    }
-    
-    .countdown-container {
-        padding: 10px;
-        min-width: 200px;
-    }
-    
-    .countdown-title {
-        font-size: 1rem;
-        margin-bottom: 8px;
-    }
-    
-    .countdown {
-        font-size: 1.1rem;
-    }
-    
-    .fullscreen-controls {
-        bottom: 15px;
-        right: 15px;
-    }
-    
-    .fullscreen-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
-    }
-    
-    .zoom-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 1.1rem;
-    }
-
-    .soundboard-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1rem;
-    }
-
-    .soundboard-overlay {
-        width: 160px;
-        bottom: 55px;
-    }
+    .content { gap: 20px; padding: 10px; justify-content: flex-start; padding-top: 20px; }
+    .digital-clock { font-size: 6rem; letter-spacing: 3px; }
+    .centiseconds { font-size: 3rem; margin-left: 5px; }
+    .logo-container { flex-direction: row; height: auto; gap: 15px; }
+    .logo { max-width: 120px; order: 0; }
+    .pill-container { width: 100px; height: 50px; }
+    .matrix-code { font-size: 6px; bottom: -15px; }
+    .rabbit { width: 120px; height: 64px; }
+    .countdown-container { padding: 10px; min-width: 200px; }
+    .countdown-title { font-size: 1rem; margin-bottom: 8px; }
+    .countdown { font-size: 1.1rem; }
+    .fullscreen-controls { bottom: 15px; right: 15px; }
+    .fullscreen-btn { width: 45px; height: 45px; font-size: 1.1rem; }
+    .zoom-btn { margin: 7px; width: 35px; height: 35px; font-size: 1.1rem; }
+    .soundboard-btn { width: 45px; height: 45px; font-size: 1.1rem; }
+    .soundboard-overlay { width: 160px; bottom: 55px; }
 }
 
 /* Petits smartphones (320px - 576px) */
 @media screen and (max-width: 576px) {
-    .content {
-        gap: 15px;
-        padding: 5px;
-        padding-top: 15px;
-    }
-
-    .digital-clock {
-        font-size: 3.5rem;
-        letter-spacing: 2px;
-    }
-    
-    .centiseconds {
-        font-size: 2rem;
-        margin-left: 3px;
-    }
-    
-    .logo {
-        max-width: 100px;
-    }
-    
-    .pill-container {
-        width: 80px;
-        height: 40px;
-    }
-    
-    .matrix-code {
-        font-size: 5px;
-        bottom: -12px;
-    }
-    
-    .rabbit {
-        width: 100px;
-        height: 53px;
-        animation: jumpRabbitMobile 6s linear infinite;
-    }
-    
-    .countdown-container {
-        padding: 8px;
-        min-width: 180px;
-    }
-    
-    .countdown-title {
-        font-size: 0.9rem;
-    }
-    
-    .countdown {
-        font-size: 1rem;
-    }
-    
-    .fullscreen-controls {
-        bottom: 10px;
-        right: 10px;
-    }
-    
-    .fullscreen-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-    
-    .zoom-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-    }
-
-    .soundboard-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
-
-    .soundboard-overlay {
-        width: 140px;
-        bottom: 50px;
-    }
-    
+    .content { gap: 15px; padding: 5px; padding-top: 15px; }
+    .digital-clock { font-size: 2.5rem; letter-spacing: 2px; }
+    .centiseconds { font-size: 2rem; margin-left: 3px; }
+    .logo { max-width: 100px; }
+    .pill-container { width: 80px; height: 40px; }
+    .matrix-code { font-size: 5px; bottom: -12px; }
+    .rabbit { width: 100px; height: 53px; animation: jumpRabbitMobile 6s linear infinite; }
+    .countdown-container { padding: 8px; min-width: 180px; }
+    .countdown-title { font-size: 0.9rem; }
+    .countdown { font-size: 1rem; }
+    .fullscreen-controls { bottom: 10px; right: 10px; }
+    .fullscreen-btn { width: 40px; height: 40px; font-size: 1rem; }
+    .zoom-btn { width: 30px; height: 30px; font-size: 1rem; }
+    .soundboard-btn { width: 40px; height: 40px; font-size: 1rem; }
+    .soundboard-overlay { width: 140px; bottom: 50px; }
     @keyframes jumpRabbitMobile {
-        0% {
-            transform: translateX(0) translateY(0);
-        }
-        30% {
-            transform: translateX(-45vw) translateY(0);
-        }
-        40% {
-            transform: translateX(-55vw) translateY(-80px);
-        }
-        50% {
-            transform: translateX(-65vw) translateY(0);
-        }
-        100% {
-            transform: translateX(-150vw) translateY(0);
-        }
+        0% { transform: translateX(0) translateY(0); }
+        30% { transform: translateX(-45vw) translateY(0); }
+        40% { transform: translateX(-55vw) translateY(-80px); }
+        50% { transform: translateX(-65vw) translateY(0); }
+        100% { transform: translateX(-150vw) translateY(0); }
     }
 }
 
 /* Très petits écrans (moins de 320px) */
 @media screen and (max-width: 320px) {
-    .content {
-        gap: 10px;
-    }
-
-    .digital-clock {
-        font-size: 3rem;
-    }
-    
-    .centiseconds {
-        font-size: 1.5rem;
-    }
-    
-    .logo {
-        max-width: 80px;
-    }
-    
-    .pill-container {
-        width: 70px;
-        height: 35px;
-    }
-    
-    .matrix-code {
-        font-size: 4px;
-    }
-    
-    .countdown-container {
-        min-width: 160px;
-    }
-    
-    .countdown-title {
-        font-size: 0.8rem;
-    }
-    
-    .countdown {
-        font-size: 0.9rem;
-    }
+    .content { gap: 10px; }
+    .digital-clock { font-size: 3rem; }
+    .centiseconds { font-size: 1.5rem; }
+    .logo { max-width: 80px; }
+    .pill-container { width: 70px; height: 35px; }
+    .matrix-code { font-size: 4px; }
+    .countdown-container { min-width: 160px; }
+    .countdown-title { font-size: 0.8rem; }
+    .countdown { font-size: 0.9rem; }
 }
 
 /* Mode paysage sur mobile */
 @media screen and (max-height: 500px) and (orientation: landscape) {
-    .content {
-        gap: 10px;
-        padding: 5px;
-        justify-content: flex-start;
-    }
-    
-    .digital-clock {
-        font-size: 4rem;
-    }
-    
-    .centiseconds {
-        font-size: 2rem;
-    }
-    
-    .logo-container {
-        height: 60px;
-    }
-    
-    .logo {
-        max-width: 80px;
-    }
-    
-    .rabbit-container {
-        height: 60px;
-    }
-    
-    .countdown-container {
-        padding: 5px;
-    }
+    .content { gap: 10px; padding: 5px; justify-content: flex-start; }
+    .digital-clock { font-size: 4rem; }
+    .centiseconds { font-size: 2rem; }
+    .logo-container { height: 60px; }
+    .logo { max-width: 80px; }
+    .rabbit-container { height: 60px; }
+    .countdown-container { padding: 5px; }
 }
 
 /* Écrans très larges (4K et plus) */
 @media screen and (min-width: 2000px) {
-    .content {
-        gap: 50px;
-    }
-
-    .digital-clock {
-        font-size: 16rem;
-    }
-    
-    .centiseconds {
-        font-size: 8rem;
-    }
-    
-    .logo {
-        max-width: 300px;
-    }
-    
-    .pill-container {
-        width: 200px;
-        height: 90px;
-    }
-    
-    .matrix-code {
-        font-size: 12px;
-        bottom: -25px;
-    }
-    
-    .countdown-container {
-        padding: 20px;
-        min-width: 400px;
-    }
-    
-    .countdown-title {
-        font-size: 1.8rem;
-    }
-    
-    .countdown {
-        font-size: 2.2rem;
-    }
-    
-    .fullscreen-btn {
-        width: 70px;
-        height: 70px;
-        font-size: 1.8rem;
-    }
-    
-    .zoom-btn {
-        width: 60px;
-        height: 60px;
-        font-size: 1.8rem;
-    }
+    .content { gap: 50px; }
+    .digital-clock { font-size: 16rem; }
+    .centiseconds { font-size: 8rem; }
+    .logo { max-width: 300px; }
+    .pill-container { width: 200px; height: 90px; }
+    .matrix-code { font-size: 12px; bottom: -25px; }
+    .countdown-container { padding: 20px; min-width: 400px; }
+    .countdown-title { font-size: 1.8rem; }
+    .countdown { font-size: 2.2rem; }
+    .fullscreen-btn { width: 70px; height: 70px; font-size: 1.8rem; }
+    .zoom-btn { width: 60px; height: 60px; font-size: 1.8rem; }
 }
 
-/* Réduction des animations pour les préférences utilisateur */
-@media (prefers-reduced-motion: reduce) {
+/* Réduction des animations pour les préférences utilisateur du moins celle du lapin en entier*/
+/* @media (prefers-reduced-motion: reduce) {
     .rabbit,
     .centiseconds {
-        animation: none;
+        animation: none !important;
     }
-    
     .pill-container:hover {
         transform: none;
     }
-    
     .zoom-btn {
         animation: none;
     }
-    
     .zoom-btn:hover span {
         transform: none;
     }
-}
+} */
 
 /* Mode sombre/clair respectueux des préférences */
 @media (prefers-color-scheme: light) {
