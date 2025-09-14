@@ -414,7 +414,7 @@ body {
     .fullscreen-controls { bottom: 15px; right: 15px; }
     .fullscreen-btn { width: 45px; height: 45px; font-size: 1.1rem; }
     .zoom-btn { margin: 7px; width: 35px; height: 35px; font-size: 1.1rem; }
-    .soundboard-btn { width: 45px; height: 45px; font-size: 1.1rem; }
+    .soundboard-btn {margin: 40px 0px; width: 45px; height: 45px; font-size: 1.1rem; }
     .soundboard-overlay { width: 160px; bottom: 55px; }
 }
 
@@ -430,9 +430,9 @@ body {
     .countdown-container { padding: 8px; min-width: 180px; }
     .countdown-title { font-size: 0.9rem; }
     .countdown { font-size: 1rem; }
-    .fullscreen-controls { bottom: 10px; right: 10px; }
+    .fullscreen-controls { margin: 20px; bottom: 30px; right: 10px; }
     .fullscreen-btn { width: 40px; height: 40px; font-size: 1rem; }
-    .zoom-btn { width: 30px; height: 30px; font-size: 1rem; }
+    .zoom-btn { margin: 7px; width: 30px; height: 30px; font-size: 1rem; }
     .soundboard-btn { width: 40px; height: 40px; font-size: 1rem; }
     .soundboard-overlay { width: 140px; bottom: 50px; }
     @keyframes jumpRabbitMobile {
